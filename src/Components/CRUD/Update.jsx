@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Update = () => {
     const [id, setId] = useState(0)
@@ -32,7 +32,13 @@ const Update = () => {
 
     return (
         <>
+     <div style={{display:'flex',justifyContent:"space-between",alignItems:"center"}}>
     <h1>Update</h1>
+    <div style={{display:'flex',justifyContent:"space-between",alignItems:"center",gap:'.3rem'}}>
+    <NavLink to = '/read'><button className="btn-warning">Read</button></NavLink>
+    <NavLink to = '/'><button className="btn btn-info">Home</button></NavLink>
+    </div>
+    </div>
     <form onSubmit={updateHandler}>
     <div className="mb-3">
     <label  className="form-label">Name</label>

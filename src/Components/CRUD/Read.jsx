@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Read = () => {
 const [datas,setDatas] = useState()
@@ -15,14 +16,37 @@ const getDataFromJson = async () => {
     }
   };
 
+
+
 // deleteUser
 const deleteUser = (id) => {
-  axios.delete(`https://6594b2411493b011606ac138.mockapi.io/CRUD/${id}`)
-    .then(() => {
-      getDataFromJson();
-    })
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  })
+    .then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`https://6594b2411493b011606ac138.mockapi.io/CRUD/${id}`)
+          .then(() => {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success"
+            });
+            getDataFromJson(); // Move the function call here
+          })
+          .catch((error) => {
+            console.error("Error deleting user:", error);
+          });
+         }
+        })
     .catch((error) => {
-      console.error("Error deleting user:", error);
+      console.error("Error displaying confirmation:", error);
     });
 };
 
@@ -47,7 +71,7 @@ return (
       <th scope="col">Name</th>
       <th scope="col">Email</th>
       <th scope="col"></th>
-      <th scope="col"></th>
+      <th scope="col"><NavLink to = '/'><button className="btn btn-info">Home</button></NavLink></th>
     </tr>
   </thead>
   {
