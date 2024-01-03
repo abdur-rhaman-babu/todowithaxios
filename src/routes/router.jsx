@@ -3,6 +3,7 @@ import App from "../App"
 import Create from "../Components/CRUD/Create"
 import Read from "../Components/CRUD/Read"
 import NotFound from './../Components/NotFound/NotFound';
+import Update from "../Components/CRUD/Update";
 
 
 const routes = createBrowserRouter([
@@ -17,6 +18,10 @@ const routes = createBrowserRouter([
             {
                 path:"/read",
                 element:<Read/>,
+            },
+            {
+                path:"/update",
+                element:<Update/>,
             },
         ]
     },
